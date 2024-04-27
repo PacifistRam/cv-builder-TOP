@@ -1,13 +1,9 @@
-import { useState } from "react";
 
-export const CvForm = () => {
-const [inputs,setInputs] = useState({
-    firstName: "",
-    lastName: "",
-    email : "",
-    phoneNo : "",
 
-})
+
+export const CvForm = ({formData,setFormData}) => {
+
+
 
 const onChangeHandler = (e) => {
   const {name,value} =  e.target;
@@ -19,16 +15,17 @@ const onChangeHandler = (e) => {
     phoneNo: /^\d*$/ // Only allow digits
   };
 
-  // Perform validation based on the field name
+  //Perform validation based on the field name
   let validatedValue = value;
   if (validationRules.hasOwnProperty(name) && !validationRules[name].test(value)) {
     // If the input value doesn't match the validation rule, don't update the state
-    validatedValue = inputs[name]; // Revert to the previous value
+    validatedValue = ''; // Revert to the previous value
   }
-    setInputs({...inputs,[name] : validatedValue})
+    setFormData({...formData,[name] : validatedValue})
 }
 
   return (
+    <>
     <form action="">
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-3">
@@ -45,7 +42,7 @@ const onChangeHandler = (e) => {
                 id="first-name"
                 autoComplete="given-name"
                 onChange={onChangeHandler}
-                value={inputs.firstName}
+                value={formData.firstName}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 maxLength={20}
               />
@@ -64,7 +61,7 @@ const onChangeHandler = (e) => {
                 name="lastName"
                 id="lastName"
                 autoComplete="given-name"
-                value={inputs.lastName}
+                value={formData.lastName}
                 onChange={onChangeHandler}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 maxLength={20}
@@ -81,7 +78,7 @@ const onChangeHandler = (e) => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      value={inputs.email}
+                      value={formData.email}
                       onChange={onChangeHandler}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       maxLength={30}
@@ -98,7 +95,7 @@ const onChangeHandler = (e) => {
                       name="phoneNo"
                       type="number"
                       autoComplete="email"
-                      value={inputs.phoneNo}
+                      value={formData.phoneNo}
                       onChange={onChangeHandler}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       maxLength={10}
@@ -107,5 +104,7 @@ const onChangeHandler = (e) => {
           </div>
         </div>
     </form>
+   
+    </>
   );
 }
