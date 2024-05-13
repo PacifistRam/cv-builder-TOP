@@ -26,8 +26,8 @@ const onChangeHandler = (e) => {
 
   return (
     <>
-    <form action="">
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <form action="" className="border rounded-md p-4">
+        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-3">
             <label
               htmlFor="first-name"
